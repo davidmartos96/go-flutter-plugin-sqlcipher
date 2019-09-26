@@ -2,6 +2,8 @@
 
 This Go package implements the host-side of the Flutter [sqflite](https://pub.dartlang.org/packages/sqflite) plugin as well as SqlCipher support using https://github.com/xeodou/go-sqlcipher
 
+This go-flutter plugin is a wrapper of the basic sqlite plugin https://github.com/nealwon/go-flutter-plugin-sqlite
+
 The plugin is still under development! Using in prod is not recommended!
 
 ## Usage
