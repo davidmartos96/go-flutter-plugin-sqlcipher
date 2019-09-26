@@ -1,17 +1,19 @@
-# go-flutter-plugin-sqlite
+# go-flutter-plugin-sqlcipher
 
-[![GoDoc](https://godoc.org/github.com/nealwon/go-flutter-plugin-sqlite?status.svg)](https://godoc.org/github.com/nealwon/go-flutter-plugin-sqlite)
-
-This Go package implements the host-side of the Flutter [sqflite](https://pub.dartlang.org/packages/sqflite) plugin.
+This Go package implements the host-side of the Flutter [sqflite](https://pub.dartlang.org/packages/sqflite) plugin as well as SqlCipher support using https://github.com/xeodou/go-sqlcipher
 
 The plugin is still under development! Using in prod is not recommended!
 
 ## Usage
 
+#### 1. Install sqflite with SqlCipher support https://github.com/davidmartos96/sqflite_sqlcipher
+
+#### 2. Include this plugin in the `main.go` file of `go-flutter`
+
 Import as:
 
 ```go
-import "github.com/nealwon/go-flutter-plugin-sqlite"
+import "github.com/davidmartos96/go-flutter-plugin-sqlcipher"
 ```
 
 Then add the following option to your go-flutter [application options](https://github.com/go-flutter-desktop/go-flutter/blob/68868301742b864b719b31ae51c7ec4b3b642d1a/example/simpleDemo/main.go#L53):
