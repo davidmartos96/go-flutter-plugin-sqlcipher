@@ -239,13 +239,13 @@ func (p *SqflitePlugin) handleOpenDatabase(arguments interface{}) (reply interfa
 	}
 
 	var engine *sql.DB
-	engine, err = sql.Open("sqlite3", dbpath)
+	engine, err = sql.Open("sqlite3", dbpath+"?_key="+password)
 	if err != nil {
 		return makeError(err)
 	}
 
-	pragma := "PRAGMA key = '" + password + "';"
-	_, err = engine.Exec(pragma)
+	pragmaPassword := "PRAGMA key = '" + password + "';"
+	_, err = engine.Exec(pragmaPassword)
 	if err != nil {
 		return makeError(err)
 	}
