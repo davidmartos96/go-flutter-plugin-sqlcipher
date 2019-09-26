@@ -3,7 +3,7 @@
 // Extra dependencies:
 //   github.com/go-flutter-desktop/go-flutter
 //   github.com/go-flutter-desktop/go-flutter/plugin
-//	 github.com/mattn/go-sqlite3
+//	 github.com/xeodou/go-sqlcipher
 //   github.com/mitchellh/go-homedir
 //   github.com/pkg/errors
 
@@ -21,9 +21,9 @@ import (
 
 	"github.com/go-flutter-desktop/go-flutter"
 	"github.com/go-flutter-desktop/go-flutter/plugin"
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/mitchellh/go-homedir"
 	"github.com/pkg/errors"
+	_ "github.com/xeodou/go-sqlcipher"
 )
 
 const channelName = "com.tekartik.sqflite"
@@ -47,6 +47,7 @@ const (
 	// when opening a database
 	PARAM_READ_ONLY       = "readOnly"       // boolean
 	PARAM_SINGLE_INSTANCE = "singleInstance" // boolean
+	PARAM_PASSWORD        = "password"
 	// Result when opening a database
 	PARAM_RECOVERED         = "recovered"
 	PARAM_QUERY_AS_MAP_LIST = "queryAsMapList" // boolean
@@ -232,11 +233,23 @@ func (p *SqflitePlugin) handleOpenDatabase(arguments interface{}) (reply interfa
 			}, nil
 		}
 	}
+	password := ""
+	if _pass, ok := args[PARAM_PASSWORD]; ok {
+		password = _pass.(string)
+	}
+
 	var engine *sql.DB
 	engine, err = sql.Open("sqlite3", dbpath)
 	if err != nil {
 		return makeError(err)
 	}
+
+	pragma := "PRAGMA key = '" + password + "';"
+	_, err = engine.Exec(pragma)
+	if err != nil {
+		return makeError(err)
+	}
+
 	_, err = engine.Exec("VACUUM")
 	if err != nil {
 		return makeError(err)
@@ -322,7 +335,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 				errResult, err := makeError(err)
 				if !continueOnError {
 					return errResult, err
-				}else{
+				} else {
 					results = append(results, errResult)
 					continue
 				}
@@ -338,7 +351,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 				errResult, err := makeError(err)
 				if !continueOnError {
 					return errResult, err
-				}else{
+				} else {
 					results = append(results, errResult)
 					continue
 				}
@@ -353,7 +366,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 				errResult, err := makeError(err)
 				if !continueOnError {
 					return errResult, err
-				}else{
+				} else {
 					results = append(results, errResult)
 					continue
 				}
@@ -367,7 +380,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 				errResult, err := makeError(err)
 				if !continueOnError {
 					return errResult, err
-				}else{
+				} else {
 					results = append(results, errResult)
 					continue
 				}
@@ -388,7 +401,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 	}
 }
 
-func (p *SqflitePlugin) createBatchOperationResult(result interface{}) (map[interface{}]interface{}) {
+func (p *SqflitePlugin) createBatchOperationResult(result interface{}) map[interface{}]interface{} {
 	out := map[interface{}]interface{}{}
 	out[PARAM_RESULT] = result
 	return out
@@ -406,7 +419,6 @@ func makeError(err error) (map[interface{}]interface{}, error) {
 	fmt.Println("error map", result)
 	return result, err
 }
-
 
 func (p *SqflitePlugin) handleDebugMode(arguments interface{}) (reply interface{}, err error) {
 	var v bool
@@ -573,14 +585,14 @@ func (p *SqflitePlugin) getRowsReply(rows *sql.Rows) (rowsReply interface{}, err
 			val = *cval.(*interface{})
 			var out interface{}
 
-			if (val == nil){
+			if val == nil {
 				out = nil
-			}else {
+			} else {
 				switch val.(type) {
-					case []byte:
-						out = string(val.([]byte))
-					default:
-						out = val
+				case []byte:
+					out = string(val.([]byte))
+				default:
+					out = val
 				}
 			}
 			resultRow = append(resultRow, out)
