@@ -1,6 +1,8 @@
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/davidmartos96/go-sqlcipher v0.0.0-20190926183620-c645d34efaf2 h1:dhvMtgA+3aLOsoNJrcTMEyyYjr0mxBvSWbD7+QkFBLs=
+github.com/davidmartos96/go-sqlcipher v0.0.0-20190926183620-c645d34efaf2/go.mod h1:/2Ezd4OoGjrRv9ry8svF6qoMOYuDOYdFACAFL7SLePU=
 github.com/go-flutter-desktop/go-flutter v0.30.0 h1:tKQSB7rUOR0o9Bq5P7VpTm0KAOHxvRwC1xDlJGlWNY4=
 github.com/go-flutter-desktop/go-flutter v0.30.0/go.mod h1:NCryd/AqiRbYSd8pMzQldYkgH1tZIFGt2ToUghZcWGA=
 github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7 h1:SCYMcCJ89LjRGwEa0tRluNRiMjZHalQZrVrvTbPh+qw=
@@ -21,8 +23,6 @@ github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZN
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.4.0 h1:2E4SXV/wtOkTonXsotYi4li6zVWxYlZuYNCXe9XRJyk=
 github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81PSLYec5m4=
-github.com/xeodou/go-sqlcipher v0.0.0-20190224185451-e2b0cbb2d94a h1:Dan/bP5w78V6xPfsFnrBaWO838yN63ldodwqIKam60Q=
-github.com/xeodou/go-sqlcipher v0.0.0-20190224185451-e2b0cbb2d94a/go.mod h1:vxgnuyTPQm6z5pRcHDe/jkd/XzIfvBplp1FGWcUvGus=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 h1:YR8cESwS4TdDjEe65xsg0ogRM/Nc3DYOhEAlW+xobZo=
 gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
