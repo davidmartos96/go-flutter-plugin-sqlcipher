@@ -19,9 +19,9 @@ import (
 	"runtime"
 	"sync"
 
+	_ "github.com/davidmartos96/go-sqlcipher"
 	"github.com/go-flutter-desktop/go-flutter"
 	"github.com/go-flutter-desktop/go-flutter/plugin"
-	_ "github.com/davidmartos96/go-sqlcipher"
 	"github.com/mitchellh/go-homedir"
 	"github.com/pkg/errors"
 )
@@ -337,7 +337,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 				errResult, err := makeError(err)
 				if !continueOnError {
 					return errResult, err
-				}else{
+				} else {
 					results = append(results, errResult)
 					continue
 				}
@@ -353,7 +353,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 				errResult, err := makeError(err)
 				if !continueOnError {
 					return errResult, err
-				}else{
+				} else {
 					results = append(results, errResult)
 					continue
 				}
@@ -368,7 +368,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 				errResult, err := makeError(err)
 				if !continueOnError {
 					return errResult, err
-				}else{
+				} else {
 					results = append(results, errResult)
 					continue
 				}
@@ -382,7 +382,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 				errResult, err := makeError(err)
 				if !continueOnError {
 					return errResult, err
-				}else{
+				} else {
 					results = append(results, errResult)
 					continue
 				}
@@ -403,7 +403,7 @@ func (p *SqflitePlugin) handleBatch(arguments interface{}) (reply interface{}, e
 	}
 }
 
-func (p *SqflitePlugin) createBatchOperationResult(result interface{}) (map[interface{}]interface{}) {
+func (p *SqflitePlugin) createBatchOperationResult(result interface{}) map[interface{}]interface{} {
 	out := map[interface{}]interface{}{}
 	out[PARAM_RESULT] = result
 	return out
@@ -419,7 +419,7 @@ func makeError(err error) (map[interface{}]interface{}, error) {
 
 	result["error"] = errDetail
 	fmt.Println("error map", result)
-	return result, err
+	return result, plugin.NewError("sqlite_error", err)
 }
 
 func (p *SqflitePlugin) handleDebugMode(arguments interface{}) (reply interface{}, err error) {
@@ -587,14 +587,14 @@ func (p *SqflitePlugin) getRowsReply(rows *sql.Rows) (rowsReply interface{}, err
 			val = *cval.(*interface{})
 			var out interface{}
 
-			if (val == nil){
+			if val == nil {
 				out = nil
-			}else {
+			} else {
 				switch val.(type) {
-					case []byte:
-						out = string(val.([]byte))
-					default:
-						out = val
+				case []byte:
+					out = string(val.([]byte))
+				default:
+					out = val
 				}
 			}
 			resultRow = append(resultRow, out)
