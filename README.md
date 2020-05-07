@@ -1,3 +1,8 @@
+# NO LONGER MAINTAINED
+
+This has only been tested with sqflite version 1.1.7+3 on Linux.
+
+
 # go-flutter-plugin-sqlcipher
 
 This Go package implements the host-side of the Flutter [sqflite](https://pub.dartlang.org/packages/sqflite) plugin as well as SqlCipher support using https://github.com/xeodou/go-sqlcipher
